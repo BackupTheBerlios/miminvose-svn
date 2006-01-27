@@ -102,12 +102,12 @@
       <Lcid>0</Lcid>
       <WrapperTool>primary</WrapperTool>
     </COMReference>
-    <ProjectReference Include="JukeBoxControls\JukeBoxControls.csproj">
+    <ProjectReference Include="..\JukeBoxControls\JukeBoxControls.csproj">
       <Name>JukeBoxControls</Name>
       <Project>{140CAE05-2690-412A-BEEC-C38981B4BB8F}</Project>
       <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>
     </ProjectReference>
-    <ProjectReference Include="JukeBoxData\JukeBoxData.csproj">
+    <ProjectReference Include="..\JukeBoxData\JukeBoxData.csproj">
       <Name>JukeBoxData</Name>
       <Project>{C46B8C0B-E9CA-4D51-9FA8-166FFB297BDA}</Project>
       <Package>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</Package>

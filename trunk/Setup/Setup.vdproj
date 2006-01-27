@@ -15,68 +15,32 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_337EF26C1A5DE2CF8F3E01205A371E58"
+        "MsmKey" = "8:_195889EBDB2D4E6F79AA29D4BB92DE1F"
+        "OwnerKey" = "8:_B4D67E7E5457410DAED129709B5D6DA0"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_5EAA17B3CF0B44C1434057AFFBD5A2A3"
         "OwnerKey" = "8:_B4D67E7E5457410DAED129709B5D6DA0"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_61B689AB17657C81D1CFC950FA3023C4"
-        "OwnerKey" = "8:_65C631386BCCF2A702B922F49499C6D9"
+        "OwnerKey" = "8:_B4D67E7E5457410DAED129709B5D6DA0"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_61B689AB17657C81D1CFC950FA3023C4"
-        "OwnerKey" = "8:_B4D67E7E5457410DAED129709B5D6DA0"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_6572A47EE84CAE69F0F0F3078F7AE072"
-        "OwnerKey" = "8:_B4D67E7E5457410DAED129709B5D6DA0"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_65C631386BCCF2A702B922F49499C6D9"
-        "OwnerKey" = "8:_B4D67E7E5457410DAED129709B5D6DA0"
+        "OwnerKey" = "8:_195889EBDB2D4E6F79AA29D4BB92DE1F"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_B4D67E7E5457410DAED129709B5D6DA0"
         "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_B87572B529E65F0A4DF412035CF49148"
-        "OwnerKey" = "8:_337EF26C1A5DE2CF8F3E01205A371E58"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_B87572B529E65F0A4DF412035CF49148"
-        "OwnerKey" = "8:_B4D67E7E5457410DAED129709B5D6DA0"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_6572A47EE84CAE69F0F0F3078F7AE072"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_B4D67E7E5457410DAED129709B5D6DA0"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_65C631386BCCF2A702B922F49499C6D9"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -88,13 +52,19 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_337EF26C1A5DE2CF8F3E01205A371E58"
+        "OwnerKey" = "8:_B4D67E7E5457410DAED129709B5D6DA0"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_B87572B529E65F0A4DF412035CF49148"
+        "OwnerKey" = "8:_195889EBDB2D4E6F79AA29D4BB92DE1F"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_5EAA17B3CF0B44C1434057AFFBD5A2A3"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -115,22 +85,44 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                }
+            }
         }
         "Release"
         {
         "DisplayName" = "8:Release"
         "IsDebugOnly" = "11:FALSE"
         "IsReleaseOnly" = "11:TRUE"
-        "OutputFilename" = "8:Release\\Setup.msi"
+        "OutputFilename" = "8:Release\\miminvose.msi"
         "PackageFilesAs" = "3:2"
         "PackageFileSize" = "3:-2147483648"
         "CabType" = "3:1"
-        "Compression" = "3:2"
+        "Compression" = "3:3"
         "SignOutput" = "11:FALSE"
         "CertificateFile" = "8:"
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                }
+            }
         }
     }
     "Deployable"
@@ -160,20 +152,51 @@
         }
         "File"
         {
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_337EF26C1A5DE2CF8F3E01205A371E58"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_195889EBDB2D4E6F79AA29D4BB92DE1F"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:JukeBoxControls, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:AxInterop.WMPLib, Version=9.0.0.3095, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_337EF26C1A5DE2CF8F3E01205A371E58"
+                    "_195889EBDB2D4E6F79AA29D4BB92DE1F"
                     {
-                    "Name" = "8:JukeBoxControls.dll"
+                    "Name" = "8:AxInterop.WMPLib.dll"
                     "Attributes" = "3:512"
                     }
                 }
-            "SourcePath" = "8:JukeBoxControls.dll"
+            "SourcePath" = "8:AxInterop.WMPLib.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_9EF9F875C28941C29570DD5FC4E59918"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_5EAA17B3CF0B44C1434057AFFBD5A2A3"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:ElementsEx, Version=1.0.1339.20627, Culture=neutral"
+                "ScatterAssemblies"
+                {
+                    "_5EAA17B3CF0B44C1434057AFFBD5A2A3"
+                    {
+                    "Name" = "8:ElementsEx.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:ElementsEx.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_9EF9F875C28941C29570DD5FC4E59918"
@@ -205,99 +228,6 @@
                     }
                 }
             "SourcePath" = "8:wmppia.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_9EF9F875C28941C29570DD5FC4E59918"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_6572A47EE84CAE69F0F0F3078F7AE072"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:ElementsEx, Version=1.0.1339.20627, Culture=neutral"
-                "ScatterAssemblies"
-                {
-                    "_6572A47EE84CAE69F0F0F3078F7AE072"
-                    {
-                    "Name" = "8:ElementsEx.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:ElementsEx.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_9EF9F875C28941C29570DD5FC4E59918"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_65C631386BCCF2A702B922F49499C6D9"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:AxInterop.WMPLib, Version=9.0.0.3095, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_65C631386BCCF2A702B922F49499C6D9"
-                    {
-                    "Name" = "8:AxInterop.WMPLib.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:AxInterop.WMPLib.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_9EF9F875C28941C29570DD5FC4E59918"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_B87572B529E65F0A4DF412035CF49148"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:JukeBoxData, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_B87572B529E65F0A4DF412035CF49148"
-                    {
-                    "Name" = "8:JukeBoxData.dll"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:JukeBoxData.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_9EF9F875C28941C29570DD5FC4E59918"
@@ -369,24 +299,24 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:Jukebox"
-        "ProductCode" = "8:{7B13328B-7F8D-4C4A-B209-A74B352B7483}"
-        "PackageCode" = "8:{7A444F0A-1AF8-47B0-BE9C-6D7DB643E147}"
+        "ProductName" = "8:miminvose"
+        "ProductCode" = "8:{9BB06923-1AB7-45B2-A856-3EB841AEDD17}"
+        "PackageCode" = "8:{46F7D0E0-444C-4782-AEF6-7FF7C61C8F13}"
         "UpgradeCode" = "8:{BFF3D8CB-4453-4C8C-B0C4-4CE237FF3050}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.0.0"
-        "Manufacturer" = "8:2PD"
+        "ProductVersion" = "8:0.8.1"
+        "Manufacturer" = "8:miminvose"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
-        "Title" = "8:Jukebox"
+        "Title" = "8:miminvose"
         "Subject" = "8:"
-        "ARPCONTACT" = "8:Mark"
+        "ARPCONTACT" = "8:miminvose"
         "Keywords" = "8:"
-        "ARPCOMMENTS" = "8:"
-        "ARPURLINFOABOUT" = "8:http://www.markryall.org"
+        "ARPCOMMENTS" = "8:miminvose jukebox"
+        "ARPURLINFOABOUT" = "8:https://developer.berlios.de/projects/miminvose"
         "ARPPRODUCTICON" = "8:"
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
@@ -891,7 +821,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_B4D67E7E5457410DAED129709B5D6DA0"
             {
-            "SourcePath" = "8:..\\obj\\Debug\\JukeBox.exe"
+            "SourcePath" = "8:..\\JukeBox\\obj\\Release\\JukeBox.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_9EF9F875C28941C29570DD5FC4E59918"
