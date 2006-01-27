@@ -1,0 +1,35 @@
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JukeBox", "JukeBox\JukeBox.csproj", "{4A41152E-2730-44E2-966C-D26DD80DCDED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JukeBoxControls", "JukeBoxControls\JukeBoxControls.csproj", "{140CAE05-2690-412A-BEEC-C38981B4BB8F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JukeBoxData", "JukeBoxData\JukeBoxData.csproj", "{C46B8C0B-E9CA-4D51-9FA8-166FFB297BDA}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{D628C172-2A9E-425B-A42A-81A3DD2218E8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4A41152E-2730-44E2-966C-D26DD80DCDED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A41152E-2730-44E2-966C-D26DD80DCDED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A41152E-2730-44E2-966C-D26DD80DCDED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A41152E-2730-44E2-966C-D26DD80DCDED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{140CAE05-2690-412A-BEEC-C38981B4BB8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{140CAE05-2690-412A-BEEC-C38981B4BB8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{140CAE05-2690-412A-BEEC-C38981B4BB8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{140CAE05-2690-412A-BEEC-C38981B4BB8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C46B8C0B-E9CA-4D51-9FA8-166FFB297BDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C46B8C0B-E9CA-4D51-9FA8-166FFB297BDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C46B8C0B-E9CA-4D51-9FA8-166FFB297BDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C46B8C0B-E9CA-4D51-9FA8-166FFB297BDA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D628C172-2A9E-425B-A42A-81A3DD2218E8}.Debug|Any CPU.ActiveCfg = Debug
+		{D628C172-2A9E-425B-A42A-81A3DD2218E8}.Release|Any CPU.ActiveCfg = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
