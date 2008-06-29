@@ -2,28 +2,16 @@ using JukeBoxData;
 using Microsoft.MediaPlayer.Interop;
 using System;
 using System.Collections.Generic;
-using System.Threading;
 using System.Windows.Forms;
 
 namespace JukeBox
 {
-	public static class FormUtil
-	{
-		public static void Resize(Form form)
-		{
-			foreach (Control c in form.Controls)
-			{
-
-			}
-		}
-	}
-
 	public class Library
 	{
-		private IWMPPlaylist _baseplaylist;
+		private readonly IWMPPlaylist _baseplaylist;
 		private bool _started;
-		private TrackCollection _tracks;
-		private int _total;
+		private readonly TrackCollection _tracks;
+		private readonly int _total;
 		private int _index;
 		private bool _shutdown;
 
@@ -61,10 +49,10 @@ namespace JukeBox
 
 		private void ImportTrackCollection()
 		{
-			for (int i = 0; i < _baseplaylist.count; i++)
+			for (var i = 0; i < _baseplaylist.count; i++)
 			{
 				if (_shutdown) break;
-				Track track = Utility.CreateTrack(_baseplaylist.get_Item(i));
+				var track = Utility.CreateTrack(_baseplaylist.get_Item(i));
 				if (track != null)
 				{
 					_tracks.Add(track);
@@ -86,14 +74,15 @@ namespace JukeBox
 		public static Track GetRandomTrack(Random random,IWMPPlaylist list)
 		{
 			Track track = null;
-			int attempts = 0;
+			var attempts = 0;
 
+// ReSharper disable ConditionIsAlwaysTrueOrFalse
 			while ((track == null) || (!System.IO.File.Exists(track.URL)))
+// ReSharper restore ConditionIsAlwaysTrueOrFalse
 			{
-				int index = random.Next(list.count);
-				track = CreateTrack(list.get_Item(index));
+                track = CreateTrack(list.get_Item(random.Next(list.count)));
 				if (track != null) break;
-				if (attempts++ > 100) break; ;
+				if (attempts++ > 100) break;
 			}
 
 			return track;
@@ -102,16 +91,16 @@ namespace JukeBox
 		public static void Randomise(IWMPPlaylist list,Queue<Track> queue)
 		{
 			queue.Clear();
-			Random random = new Random();
-			List<Track> tracks = new List<Track>();
-			for(int i=0;i<list.count;i++)
+			var random = new Random();
+			var tracks = new List<Track>();
+			for(var i=0;i<list.count;i++)
 			{
-				Track t = CreateTrack(list.get_Item(i));
+                var t = CreateTrack(list.get_Item(i));
 				if (t != null) tracks.Add(t);
 			}
 			while (tracks.Count > 0)
 			{
-				int index = random.Next(tracks.Count);
+				var index = random.Next(tracks.Count);
 				queue.Enqueue(tracks[index]);
 				tracks.RemoveAt(index);
 			}
@@ -129,16 +118,17 @@ namespace JukeBox
 //				}
 //			}
 
-			string mediatype = item.getItemInfo("MediaType");
+			var mediatype = item.getItemInfo("MediaType");
 			if (!mediatype.Equals("audio")) return null;
 
-			Track track = new Track();
-			track.Title = item.name;
-			ushort index = 0;
+			var track = new Track {Title = item.name};
+		    ushort index = 0;
 			try
 			{
 				index = ushort.Parse(item.getItemInfo("WM/TrackNumber"));
-			} catch {}
+// ReSharper disable EmptyGeneralCatchClause
+			} catch (Exception) {}
+// ReSharper restore EmptyGeneralCatchClause
 			track.TrackNo = index;
 			track.Artist = item.getItemInfo("Author");
 			track.AlbumArtist = item.getItemInfo("WM/AlbumArtist");
@@ -159,7 +149,7 @@ namespace JukeBox
 
 		public static bool IsEmpty(string s)
 		{
-			return ((s==null)||(s.Length==0));
+			return string.IsNullOrEmpty(s);
 		}
 	}
 }

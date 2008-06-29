@@ -9,9 +9,8 @@ using JukeBoxControls;
 
 namespace JukeBox
 {
-	public class JukeBox : System.Windows.Forms.Form
+	public class JukeBox : Form
 	{
-		//private static readonly int INITIALQUEUESIZE = 5; // Initial number of randomly selected tracks to throw into the queue
 		private const string STOPPEDSTATUS = "Stopped";
 
 		private enum State
@@ -25,28 +24,18 @@ namespace JukeBox
 			Shutdown
 		}
 
-		private Random _random = new Random();
+        private readonly Random _random = new Random();
+		private readonly Queue<Track> _default = new Queue<Track>();
+		private readonly Queue<Track> _requests = new Queue<Track>();
+		private readonly Library _library;
+        private readonly List<Label> _labels = new List<Label>();
 
-		private State _state = State.Default;
-
-		private Queue<Track> _default = new Queue<Track>();
-		private Queue<Track> _requests = new Queue<Track>();
-		private Library _library;
-
-		private Label _selected;
-		private List<Label> _labels = new List<Label>();
-
+        private State _state = State.Default;
+        private Label _selected;
 		private StringBuilder _buffer = new StringBuilder();
-
 		private Track _currenttrack;
 
-		// Menu option labels
-
-		// Main panel
-
-		// Menu option panels
-
-		private System.Windows.Forms.Timer timerStartSong;
+		private Timer timerStartSong;
 		private Timer timerUpdateDisplay;
 		private Timer timerLoadLibrary;
 		private Panel panelAll;
@@ -78,31 +67,20 @@ namespace JukeBox
 
 			Constants.SetLabelPresentation(lblCriteria);
 
-			Load+=new EventHandler(Form1_Load);
-			KeyPress+=new KeyPressEventHandler(Form1_KeyPress);
-			KeyUp+=new KeyEventHandler(Form1_KeyUp);
+			Load+=Form1_Load;
+			KeyPress+=Form1_KeyPress;
+			KeyUp+=Form1_KeyUp;
 
 			SetSelected(lblNowPlaying);
 
-			//Constants.SetPanelPresentation(panelAll);
-			//Constants.SetPanelPresentation(panelNowPlaying);
-			//Constants.SetPanelPresentation(panelSearch);
+			Player.StatusChange += Player_StatusChange;
 
-			Player.StatusChange += new EventHandler(Player_StatusChange);
-
-			IWMPPlaylist allitems = Player.mediaCollection.getAll();
-
-			//for (int i = 0; i < INITIALQUEUESIZE; i++)
-			//{
-			//    Track track = null;
-			//    track = Utility.GetRandomTrack(_random,allitems);
-			//    if (track != null)_default.Enqueue(track);
-			//}
+			var allitems = Player.mediaCollection.getAll();
 
 			_library = new Library(allitems);
 
-			stringListControl.StringSelected+=new StringSelectedEventHandler(stringListControl_StringSelected);
-			trackListControl.TrackSelected+=new TrackSelectedEventHandler(trackListControl_TrackSelected);
+			stringListControl.StringSelected+=stringListControl_StringSelected;
+			trackListControl.TrackSelected+=trackListControl_TrackSelected;
 			trackControl.Readonly = true;
 			trackListControl.ReadOnly = true;
 
@@ -117,21 +95,19 @@ namespace JukeBox
 		{
 			get
 			{
-				List<Track> list = new List<Track>();
-				foreach (Track track in _requests) list.Add(track);
-				foreach (Track track in _default) list.Add(track);
+				var list = new List<Track>();
+				foreach (var track in _requests) list.Add(track);
+				foreach (var track in _default) list.Add(track);
 				return list;
 			}
 		}
 
 		private void UpdateQueueDisplay()
 		{
-			if(_state==State.Default)
-			{
-				trackListControl.ReadOnly = true;
-				trackListControl.Tracks = QueuedTracks;
-				trackListControl.Visible = true;
-			}
+		    if (_state != State.Default) return;
+		    trackListControl.ReadOnly = true;
+		    trackListControl.Tracks = QueuedTracks;
+		    trackListControl.Visible = true;
 		}
 
 		private Track GetNext()
@@ -140,9 +116,11 @@ namespace JukeBox
 
 			while((track==null)||(!System.IO.File.Exists(track.URL)))
 			{
-				if (_requests.Count > 0) track = (Track)_requests.Dequeue();
-				else if (_default.Count > 0) track = (Track)_default.Dequeue();
-				else track = Utility.GetRandomTrack(_random,Player.mediaCollection.getAll());
+                if (_requests.Count > 0) track = _requests.Dequeue();
+// ReSharper disable ConvertIfStatementToConditionalTernaryExpression
+			    else if (_default.Count > 0) track = _default.Dequeue();
+// ReSharper restore ConvertIfStatementToConditionalTernaryExpression
+			    else track = Utility.GetRandomTrack(_random,Player.mediaCollection.getAll());
 			}
 
 			return track;
@@ -164,15 +142,15 @@ namespace JukeBox
 
 		private void InitialiseLabels()
 		{
-			foreach(Label l in _labels) { InitialiseLabel(l); }
+			foreach(var l in _labels) { InitialiseLabel(l); }
 		}
 
 		private void InitialiseLabel(Label label)
 		{
 			Constants.SetLabelPresentation(label);
-			label.Click+=new EventHandler(label_Click);
-			label.MouseEnter+=new EventHandler(label_MouseEnter);
-			label.MouseLeave+=new EventHandler(label_MouseLeave);
+			label.Click+=label_Click;
+			label.MouseEnter+=label_MouseEnter;
+			label.MouseLeave+=label_MouseLeave;
 		}
 
 		private void SetState(State state)
@@ -418,21 +396,21 @@ namespace JukeBox
 
 		private void label_MouseEnter(object sender, EventArgs e)
 		{
-			Label label = (Label)sender;
+			var label = (Label)sender;
 			if (label==_selected) return;
 			Constants.SetLabelPresentationHover(label);
 		}
 
 		private void label_MouseLeave(object sender, EventArgs e)
 		{
-			Label label = (Label)sender;
+			var label = (Label)sender;
 			if (label==_selected) return;
 			Constants.SetLabelPresentation(label);
 		}
 
 		private void label_Click(object sender, EventArgs e)
 		{
-			Label label = (Label)sender;
+			var label = (Label)sender;
 			SetSelected(label);
 		}
 
@@ -444,22 +422,20 @@ namespace JukeBox
 
 		private void Player_StatusChange(object sender, EventArgs e)
 		{
-			string status = Player.status.Trim();
-			if (status.Equals(STOPPEDSTATUS))
-			{
-				_currenttrack = null;
-				UpdateTime();
-				timerStartSong.Enabled = true;
-			}
+			var status = Player.status.Trim();
+		    if (!status.Equals(STOPPEDSTATUS)) return;
+		    _currenttrack = null;
+		    UpdateTime();
+		    timerStartSong.Enabled = true;
 		}
 
-		private void timerStart_Tick(object sender, System.EventArgs e)
+		private void timerStart_Tick(object sender, EventArgs e)
 		{
 			PlayNext();
 			timerStartSong.Enabled = false;
 		}
 
-		private void timerUpdateDisplay_Tick(object sender, System.EventArgs e)
+		private void timerUpdateDisplay_Tick(object sender, EventArgs e)
 		{
 			if (_library.Index + 1 == _library.Total) lblImportStatus.Visible = false;
 			else lblImportStatus.Text = string.Format("{0}/{1}", _library.Index, _library.Total);
@@ -468,14 +444,12 @@ namespace JukeBox
 
 		private void UpdateTime()
 		{
-			//if (_state == State.Shutdown) return;
 			if (_currenttrack==null)
 			{
 				lblTime.Text = string.Empty;
 				return;
 			}
-			// TODO: Allow configuration for which time to display.
-			int remaining = (int)(_currenttrack.Duration - Player.Ctlcontrols.currentPosition);
+			var remaining = (int)(_currenttrack.Duration - Player.Ctlcontrols.currentPosition);
 			lblTime.Text = string.Format("{0:00}:{1:00}",(remaining/60),(remaining%60));
 		}
 
@@ -483,20 +457,18 @@ namespace JukeBox
 		{
 			if (_state==State.StringListSearchComplete) return;
 			if (_state==State.TrackSearchComplete) return;
-			if (char.IsLetter(e.KeyChar)||char.IsPunctuation(e.KeyChar)||char.IsSeparator(e.KeyChar))
-			{
-				e.Handled = true;
-				_buffer.Append(e.KeyChar);
-				lblCriteria.Text = _buffer.ToString();
-			}
+		    if (!char.IsLetter(e.KeyChar) && !char.IsPunctuation(e.KeyChar) && !char.IsSeparator(e.KeyChar)) return;
+		    e.Handled = true;
+		    _buffer.Append(e.KeyChar);
+		    lblCriteria.Text = _buffer.ToString();
 		}
 
 		private void Form1_KeyUp(object sender, KeyEventArgs e)
 		{
 			switch(e.KeyCode)
 			{
-				case System.Windows.Forms.Keys.Enter:
-					string command = _buffer.ToString();
+				case Keys.Enter:
+					var command = _buffer.ToString();
 					_buffer = new StringBuilder();
 					switch(_state)
 					{
@@ -507,7 +479,7 @@ namespace JukeBox
 								Player.Visible = !Player.Visible;
 								break;
 							case "p":
-								string status = Player.status.Trim();
+								var status = Player.status.Trim();
 								if (status.StartsWith("Playing")) Player.Ctlcontrols.pause();
 								else if (status.StartsWith("Paused")) Player.Ctlcontrols.play();
 								break;
@@ -521,12 +493,8 @@ namespace JukeBox
 								Close();
 								_state = State.Shutdown;
 								break;
-							//case "build":
-							//    _tracks = Utility.BuildTrackCollection(Player.mediaCollection.getAll());
-							//    //Utility.SaveTrackCollection(_tracks);
-							//    break;
 							default:
-								IWMPPlaylistArray playlists = Player.playlistCollection.getByName(command);
+								var playlists = Player.playlistCollection.getByName(command);
 								if (playlists.count>0)
 								{
 									Utility.Randomise(playlists.Item(0),_default);
@@ -536,7 +504,7 @@ namespace JukeBox
 						}
 							break;
 						case State.ArtistSearch:
-							List<string>artists = _library.Tracks.GetArtists(lblCriteria.Text);
+							var artists = _library.Tracks.GetArtists(lblCriteria.Text);
 							if (artists.Count == 0) SetState(State.ArtistSearch);
 							else
 							{
@@ -545,7 +513,7 @@ namespace JukeBox
 							}
 							break;
 						case State.AlbumSearch:
-							List<string> albums = _library.Tracks.GetAlbums(lblCriteria.Text);
+							var albums = _library.Tracks.GetAlbums(lblCriteria.Text);
 							if (albums.Count==0) SetState(State.AlbumSearch);
 							else
 							{
@@ -554,7 +522,7 @@ namespace JukeBox
 							}
 							break;
 						case State.TrackSearch:
-							List<Track>tracks = _library.Tracks.GetTracks(lblCriteria.Text);
+							var tracks = _library.Tracks.GetTracks(lblCriteria.Text);
 							if (tracks.Count==0) SetState(State.TrackSearch);
 							else
 							{
@@ -567,7 +535,7 @@ namespace JukeBox
 							ShowStringSelectResults(stringListControl.Selected);
 							break;
 						case State.TrackSearchComplete:
-							Track track = trackListControl.Selected;
+							var track = trackListControl.Selected;
 							if (track!=null)
 							{
 								_requests.Enqueue(track);
@@ -576,8 +544,8 @@ namespace JukeBox
 							break;
 					}
 					break;
-				case System.Windows.Forms.Keys.Delete:
-				case System.Windows.Forms.Keys.Back:
+				case Keys.Delete:
+				case Keys.Back:
 					switch(_state)
 					{
 						case State.AlbumSearch:
@@ -589,12 +557,12 @@ namespace JukeBox
 					}
 
 					break;
-				case System.Windows.Forms.Keys.Escape:
+				case Keys.Escape:
 					_buffer = new StringBuilder();
 					switch(_state)
 					{
 						case State.StringListSearchComplete:
-							lblCriteria.Text = string.Empty;
+							lblCriteria.Text = string.Empty; 
 							if(_selected==lblSearchAlbum) SetState(State.AlbumSearch);
 							if(_selected==lblSearchArtist) SetState(State.ArtistSearch);
 							break;
@@ -610,7 +578,7 @@ namespace JukeBox
 							break;
 					}
 					break;
-				case System.Windows.Forms.Keys.Down:
+				case Keys.Down:
 					switch(_state)
 					{
 						case State.Default:
@@ -633,7 +601,7 @@ namespace JukeBox
 							break;
 					}
 					break;
-				case System.Windows.Forms.Keys.Up:
+				case Keys.Up:
 					switch(_state)
 					{
 						case State.Default:
@@ -656,12 +624,12 @@ namespace JukeBox
 							break;
 					}
 					break;
-				case System.Windows.Forms.Keys.Left:
+				case Keys.Left:
 					if (_state==State.StringListSearchComplete) stringListControl.PreviousPage();
 					if (_state==State.TrackSearchComplete) trackListControl.PreviousPage();
 					if (_state==State.Default) trackListControl.PreviousPage();
 					break;
-				case System.Windows.Forms.Keys.Right:
+				case Keys.Right:
 					if (_state==State.StringListSearchComplete) stringListControl.NextPage();
 					if (_state==State.TrackSearchComplete) trackListControl.NextPage();
 					if (_state==State.Default) trackListControl.NextPage();
@@ -698,7 +666,6 @@ namespace JukeBox
 		{
 			timerLoadLibrary.Enabled = false;
 			_library.Load();
-			MessageBox.Show("Indexing complete");
 		}
 	}
 }

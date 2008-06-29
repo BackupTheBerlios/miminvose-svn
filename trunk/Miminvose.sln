@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JukeBoxData", "JukeBoxData\
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{D628C172-2A9E-425B-A42A-81A3DD2218E8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JukeBoxTest", "JukeBoxTest\JukeBoxTest.csproj", "{797F62D7-2460-4035-A4A7-CC6822FCA7A2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,6 +30,10 @@ Global
 		{C46B8C0B-E9CA-4D51-9FA8-166FFB297BDA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D628C172-2A9E-425B-A42A-81A3DD2218E8}.Debug|Any CPU.ActiveCfg = Debug
 		{D628C172-2A9E-425B-A42A-81A3DD2218E8}.Release|Any CPU.ActiveCfg = Release
+		{797F62D7-2460-4035-A4A7-CC6822FCA7A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{797F62D7-2460-4035-A4A7-CC6822FCA7A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{797F62D7-2460-4035-A4A7-CC6822FCA7A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{797F62D7-2460-4035-A4A7-CC6822FCA7A2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
