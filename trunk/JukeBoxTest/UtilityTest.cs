@@ -24,9 +24,18 @@ namespace JukeBoxTest
         {
             var mocks = new MockRepository();
             var item = mocks.StrictMock<IWMPMedia>();
+
             Expect.Call(item.getItemInfo("MediaType")).Return("audio");
+            Expect.Call(item.name).Return("trackname");
+            Expect.Call(item.getItemInfo("WM/TrackNumber")).Return("1");
+            Expect.Call(item.getItemInfo("Author")).Return("artist");
+            Expect.Call(item.getItemInfo("WM/AlbumArtist")).Return("album artist");
+            Expect.Call(item.getItemInfo("WM/AlbumTitle")).Return("album title");
+            Expect.Call(item.duration).Return(60);
+            Expect.Call(item.sourceURL).Return(@"c:\path\to\file.mp3");
+
             mocks.ReplayAll();
-            Assert.IsNull(Utility.CreateTrack(item));
+            Assert.IsNotNull(Utility.CreateTrack(item));
             mocks.VerifyAll();
         }
     }
