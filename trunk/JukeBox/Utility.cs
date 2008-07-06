@@ -9,63 +9,39 @@ namespace JukeBox
 	public class Library
 	{
 		private readonly IWMPPlaylist _baseplaylist;
-		private bool _started;
-		private readonly TrackCollection _tracks;
-		private readonly int _total;
-		private int _index;
-		private bool _shutdown;
+	    private bool _shutdown;
+
+        public bool Started { get; private set; }
+        public int Total { get; private set; }
+        public int Index { get; private set; }
+        public TrackCollection Tracks { get; private set; }
 
 		public Library(IWMPPlaylist playlist)
 		{
 			_baseplaylist = playlist;
-			_tracks = new TrackCollection();
-			_total = playlist.count;
+			Tracks = new TrackCollection();
+			Total = playlist.count;
 		}
 
-		public void Load()
-		{
-			ImportTrackCollection();
-		}
+        public void Load()
+        {
+            for (var i = 0; i < _baseplaylist.count; i++)
+            {
+                if (_shutdown) break;
+                var track = Utility.CreateTrack(_baseplaylist.get_Item(i));
+                if (track != null)
+                {
+                    Tracks.Add(track);
+                    Started = true;
+                }
+                if (i % 100 == 0) Application.DoEvents();
+                Index = i;
+            }
+        }
 
-		public bool Started
-		{
-			get { return _started; }
-		}
-
-		public int Total
-		{
-			get { return _total; }
-		}
-
-		public int Index
-		{
-			get { return _index; }
-		}
-
-		public void Stop()
+	    public void Stop()
 		{
 			_shutdown = true;
-		}
-
-		private void ImportTrackCollection()
-		{
-			for (var i = 0; i < _baseplaylist.count; i++)
-			{
-				if (_shutdown) break;
-				var track = Utility.CreateTrack(_baseplaylist.get_Item(i));
-				if (track != null)
-				{
-					_tracks.Add(track);
-					_started = true;
-				}
-				if (i % 100 == 0) Application.DoEvents();
-				_index = i;
-			}
-		}
-
-		public TrackCollection Tracks
-		{
-			get { return _tracks; }
 		}
 	}
 
@@ -73,12 +49,10 @@ namespace JukeBox
 	{
 		public static Track GetRandomTrack(Random random,IWMPPlaylist list)
 		{
-			Track track = null;
+			Track track;
 			var attempts = 0;
 
-// ReSharper disable ConditionIsAlwaysTrueOrFalse
-			while ((track == null) || (!System.IO.File.Exists(track.URL)))
-// ReSharper restore ConditionIsAlwaysTrueOrFalse
+			while (true)
 			{
                 track = CreateTrack(list.get_Item(random.Next(list.count)));
 				if (track != null) break;
@@ -108,28 +82,14 @@ namespace JukeBox
 
 		public static Track CreateTrack(IWMPMedia item)
 		{
-//			if (item.name.Equals("jo44"))
-//			{
-//				for(int i=0;i<item.attributeCount;i++)
-//				{
-//					string name = item.getAttributeName(i);
-//					string att = item.getItemInfo(name);
-//					Console.WriteLine(string.Format("{0}={1}",name,att));
-//				}
-//			}
-
 			var mediatype = item.getItemInfo("MediaType");
 			if (!mediatype.Equals("audio")) return null;
 
 			var track = new Track {Title = item.name};
-		    ushort index = 0;
-			try
-			{
-				index = ushort.Parse(item.getItemInfo("WM/TrackNumber"));
-// ReSharper disable EmptyGeneralCatchClause
-			} catch (Exception) {}
-// ReSharper restore EmptyGeneralCatchClause
-			track.TrackNo = index;
+
+		    ushort index;
+			if (ushort.TryParse(item.getItemInfo("WM/TrackNumber"),out index)) track.TrackNo = index;
+			
 			track.Artist = item.getItemInfo("Author");
 			track.AlbumArtist = item.getItemInfo("WM/AlbumArtist");
 			if (IsEmpty(track.AlbumArtist)&&!IsEmpty(track.Artist)) track.AlbumArtist = track.Artist;
