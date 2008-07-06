@@ -18,5 +18,16 @@ namespace JukeBoxTest
             Assert.IsNull(Utility.CreateTrack(item));
             mocks.VerifyAll();
         }
+
+        [Test]
+        public void shouldReturnTrackFromWMPMediaWithAudioMediaType()
+        {
+            var mocks = new MockRepository();
+            var item = mocks.StrictMock<IWMPMedia>();
+            Expect.Call(item.getItemInfo("MediaType")).Return("audio");
+            mocks.ReplayAll();
+            Assert.IsNull(Utility.CreateTrack(item));
+            mocks.VerifyAll();
+        }
     }
 }
