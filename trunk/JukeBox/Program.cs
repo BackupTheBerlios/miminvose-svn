@@ -8,7 +8,7 @@ namespace JukeBox
 		[STAThread]
 		static void Main()
 		{
-			Application.Run(new JukeBoxes());
+			Application.Run(new JukeBox());
 		}
 	}
 }
